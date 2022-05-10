@@ -25,7 +25,8 @@ const server = http.createServer((req, res) => {
     }
     if (urlParse.pathname === '/get') {
         const apellido = urlParse.query.apellido || ''
-        client.query(`select * from estudiantes where apellido  = '${apellido}'`, (err, resDB) => {
+        console.log(apellido);
+        client.query(`select * from estudiantes where apellido  =  $1`, [apellido], (err, resDB) => {
             console.log(err, resDB)
             res.write(JSON.stringify(resDB.rows))
             res.end()
